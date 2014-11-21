@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:enabled="false"
+    android:orientation="horizontal"
+    style="@style/MyActionBar"
+    android:paddingEnd="8dip"
+    android:paddingStart="8dip" >
+    
+     <!-- DO NOT MODIFY THIS FILE -->
+
+    <Button
+        android:id="@+id/bu_left"
+        android:onClick="onLeftClick"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/server"
+        android:minWidth="@dimen/min_button_width"
+        android:padding="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_alignParentLeft="true"
+        style="@style/ActionBarButton" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/title_size"
+        android:textColor="@color/white"
+        android:text="@string/client"/>
+
+    <Button
+        android:id="@+id/bu_right"
+        android:onClick="onRightClick"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/client"
+        android:minWidth="@dimen/min_button_width"
+        android:padding="@dimen/padding"
+        android:layout_alignParentRight="true"
+        style="@style/ActionBarButton" />
+
+</RelativeLayout>

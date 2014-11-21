@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="light_grey">#FFD8D9DF</color>
+    <color name="dark_grey">#FF595C6E</color>
+    <color name="salmon">#FFFFA239</color>
+    <color name="submit">#FFAD5700</color>
+    <color name="action_bar">#991B1969</color>
+    <color name="menu_button">#FF545385</color>
+</resources>
