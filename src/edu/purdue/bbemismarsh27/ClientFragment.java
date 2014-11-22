@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 /**
  * This fragment is the "page" where the user inputs information about the
@@ -20,6 +25,10 @@ public class ClientFragment extends Fragment implements OnClickListener {
 	 * Activity which have to receive callbacks.
 	 */
 	private SubmitCallbackListener activity;
+	
+	private RadioGroup preferences;
+	private EditText name;
+	private Spinner from,to;
 
 	/**
 	 * Creates a ProfileFragment
@@ -49,8 +58,7 @@ public class ClientFragment extends Fragment implements OnClickListener {
 			return null;
 		}
 
-		View view = inflater.inflate(R.layout.client_fragment_layout,
-				container, false);
+		View view = inflater.inflate(R.layout.client_fragment_layout,container, false);
 
 		/**
 		 * Register this fragment to be the OnClickListener for the submit
@@ -58,8 +66,14 @@ public class ClientFragment extends Fragment implements OnClickListener {
 		 */
 		view.findViewById(R.id.bu_submit).setOnClickListener(this);
 
-		// TODO: import your Views from the layout here. See example in
+		// import your Views from the layout here. See example in
 		// ServerFragment.
+		name = (EditText)view.findViewById(R.id.et_name);
+		preferences = (RadioGroup) view.findViewById(R.id.rg_preferences);
+		from = (Spinner)view.findViewById(R.id.spin_from);
+		
+
+		//TODO: load submit button from xml
 
 		return view;
 	}

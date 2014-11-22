@@ -10,7 +10,7 @@ package edu.purdue.bbemismarsh27;
 public class Request {
 
 	// All valid locations
-	private static final String[] LOCATION = new String[] { "EE", "CL50", "LWSN", "PMU", "PUSH", "*" };
+	public static final String[] LOCATION = new String[] { "EE", "CL50", "LWSN", "PMU", "PUSH", "*" };
 
 	private String name, from, to;
 	private int type;
