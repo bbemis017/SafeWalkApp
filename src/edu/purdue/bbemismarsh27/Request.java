@@ -31,10 +31,10 @@ public class Request {
 		this.from = from;
 		this.to = to;
 		this.type = type;
-		if (from.equalsIgnoreCase("*"))
+		if (from.equals("*"))
 			valid = false;
 
-		if (to.equalsIgnoreCase(from))
+		if (to.equals(from))
 			valid = false;
 
 		if (!validLocation(from))
@@ -45,6 +45,12 @@ public class Request {
 
 		if (type > 2 || type < 0)
 			valid = false;
+		
+		//if a requester only wants to match with volunteers to location must be defined
+		if ( type == 1 && to.equals("*") )
+			valid = false;
+		
+		
 
 	}
 
