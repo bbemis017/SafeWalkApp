@@ -113,17 +113,15 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 	@Override
 	public void onSubmit() {
 		// TODO: Get client info via client fragment
-
+		
 		// Server info
-		String host = this.serverFragment.getHost(getResources().getString(
-				R.string.default_host));
-		int port = this.serverFragment.getPort(Integer.parseInt(getResources()
-				.getString(R.string.default_port)));
+		String host = this.serverFragment.getHost( getResources().getString(R.string.default_host) );
+		
+		int port = this.serverFragment.getPort(Integer.parseInt( getResources().getString(R.string.default_port) ) );
 		// TODO: sanity check the results of the previous two dialogs
 
 		// TODO: Need to get command from client fragment
-		String command = this.getResources()
-				.getString(R.string.default_command);
+		String command = this.getResources().getString(R.string.default_command);
 
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 
@@ -133,8 +131,7 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 
 		// TODO: You may want additional parameters here if you tailor
 		// the match fragment
-		MatchFragment frag = MatchFragment.newInstance(this, host, port,
-				command);
+		MatchFragment frag = MatchFragment.newInstance(this, host, port,command);
 
 		ft.replace(R.id.fl_main, frag);
 		ft.commit();

@@ -52,25 +52,26 @@ public final class R {
     public static final class id {
         public static final int bu_left=0x7f0a0000;
         public static final int bu_right=0x7f0a0002;
-        public static final int bu_start_over=0x7f0a0010;
-        public static final int bu_submit=0x7f0a000f;
-        public static final int et_host=0x7f0a0012;
-        public static final int et_name=0x7f0a0005;
-        public static final int et_port=0x7f0a0014;
+        public static final int bu_start_over=0x7f0a0011;
+        public static final int bu_submit=0x7f0a0010;
+        public static final int et_host=0x7f0a0013;
+        public static final int et_name=0x7f0a0006;
+        public static final int et_port=0x7f0a0015;
         public static final int fl_main=0x7f0a0003;
-        public static final int rb_noPreference=0x7f0a000a;
-        public static final int rb_requester=0x7f0a0008;
-        public static final int rb_volunteer=0x7f0a0009;
-        public static final int rg_preferences=0x7f0a0007;
-        public static final int spin_from=0x7f0a000c;
-        public static final int spin_to=0x7f0a000e;
-        public static final int tv_from=0x7f0a000b;
-        public static final int tv_host=0x7f0a0011;
-        public static final int tv_name=0x7f0a0004;
-        public static final int tv_port=0x7f0a0013;
-        public static final int tv_preferences=0x7f0a0006;
+        public static final int ll_name=0x7f0a0004;
+        public static final int rb_noPreference=0x7f0a000b;
+        public static final int rb_requester=0x7f0a0009;
+        public static final int rb_volunteer=0x7f0a000a;
+        public static final int rg_preferences=0x7f0a0008;
+        public static final int spin_from=0x7f0a000d;
+        public static final int spin_to=0x7f0a000f;
+        public static final int tv_from=0x7f0a000c;
+        public static final int tv_host=0x7f0a0012;
+        public static final int tv_name=0x7f0a0005;
+        public static final int tv_port=0x7f0a0014;
+        public static final int tv_preferences=0x7f0a0007;
         public static final int tv_title=0x7f0a0001;
-        public static final int tv_to=0x7f0a000d;
+        public static final int tv_to=0x7f0a000e;
     }
     public static final class layout {
         public static final int action_bar=0x7f030000;

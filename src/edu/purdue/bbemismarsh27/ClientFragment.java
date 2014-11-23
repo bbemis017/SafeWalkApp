@@ -26,9 +26,9 @@ public class ClientFragment extends Fragment implements OnClickListener {
 	 */
 	private SubmitCallbackListener activity;
 	
-	private RadioGroup preferences;
-	private EditText name;
-	private Spinner from,to;
+	public RadioGroup preferences;
+	public EditText name;
+	public Spinner from,to;
 
 	/**
 	 * Creates a ProfileFragment
@@ -78,9 +78,6 @@ public class ClientFragment extends Fragment implements OnClickListener {
 		to = (Spinner)view.findViewById(R.id.spin_to);
 		to.setAdapter(toAdapter);
 		
-		
-
-		//TODO: load submit button from xml
 
 		return view;
 	}
