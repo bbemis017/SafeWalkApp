@@ -115,6 +115,29 @@ public class Request {
 		}
 	
 	/**
+	 * checks the validity of host and port, if not valid set's entire request
+	 * to not being valid and adds alerts
+	 * @param host
+	 * @param port
+	 */
+	public void isHostPortValid(String host, int port){
+		
+		if ( host.contains(" ") ){
+			valid = false;
+			addAlert("Host cannot contain a space");
+		}
+		if( host.length() == 0){
+			valid = false;
+			addAlert("Must enter a host");
+		}
+		if ( port < 1 || port > 65535){
+			valid = false;
+			addAlert("Port number must be between 1 and 65535 inclusive");
+		}
+		
+	}
+	
+	/**
 	 * Adds new Alert to Alert array
 	 */
 	 private void addAlert(String alert){

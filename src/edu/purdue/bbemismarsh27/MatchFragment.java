@@ -17,6 +17,7 @@ import android.view.ViewGroup;
  * server and wait for a match.
  *
  * @author YL
+ * @author Benjamin Bemis
  */
 public class MatchFragment extends Fragment implements OnClickListener {
 
@@ -42,6 +43,8 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	 * Command the user should send.
 	 */
 	private String command;
+	
+	private Request reqToSend, reqRecieved;
 
 	// TODO: your own class fields here
 
@@ -59,19 +62,21 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	 * 
 	 * @param command
 	 *            command you have to send to the server.
+	 * @param reqToSend
+	 * 			  request to send to the server
 	 * 
 	 * @return the fragment initialized.
 	 */
 	// TODO: you can add more parameters, follow the way we did it.
 	// ** DO NOT CREATE A CONSTRUCTOR FOR MatchFragment **
-	public static MatchFragment newInstance(StartOverCallbackListener activity,
-			String host, int port, String command) {
+	public static MatchFragment newInstance(StartOverCallbackListener activity,String host, int port, String command, Request reqToSend) {
 		MatchFragment f = new MatchFragment();
 
 		f.activity = activity;
 		f.host = host;
 		f.port = port;
 		f.command = command;
+		f.reqToSend = reqToSend;
 
 		return f;
 	}

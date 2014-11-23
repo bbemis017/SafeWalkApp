@@ -18,6 +18,7 @@ import android.widget.Spinner;
  * request, he/she wishes to send.
  *
  * @author YL
+ * @author Benjamin Bemis
  */
 public class ClientFragment extends Fragment implements OnClickListener {
 
