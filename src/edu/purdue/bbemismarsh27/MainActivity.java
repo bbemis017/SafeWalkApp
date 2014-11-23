@@ -157,6 +157,9 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 			ft.replace(R.id.fl_main, frag);
 			ft.commit();
 		}
+		else{
+			//TODO: display AlertDialog
+		}
 	}
 
 	/**
