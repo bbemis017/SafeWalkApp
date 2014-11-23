@@ -15,6 +15,7 @@ public class Request {
 	private String name, from, to;
 	private int type;
 	private boolean valid;
+	private String[] alerts;
 
 	/**
 	 * Creates new Request and determines if it is a valid request
@@ -26,32 +27,55 @@ public class Request {
 	 */
 	public Request(String name, String from, String to, int type) {
 		valid = true;
-
+		alerts = new String[0];
 		this.name = name;
 		this.from = from;
 		this.to = to;
 		this.type = type;
-		if (from.equals("*"))
+		if (from.equals("*")){
 			valid = false;
+			addAlert("From must be a defined location");
+		}
 
-		if (to.equals(from))
+		if (to.equals(from)){
 			valid = false;
+			addAlert("To cannot be the same location as from");
+		}
 
-		if (!validLocation(from))
+		if (!validLocation(from)){
 			valid = false;
+			addAlert("From is not a defined location");
+		}
 
-		if (!validLocation(to))
+		if (!validLocation(to)){
 			valid = false;
+			addAlert("To is not a defined location");
+		}
 
-		if (type > 2 || type < 0)
+		if (type > 2 || type < 0){
 			valid = false;
+			addAlert("Type must be between 0 and 2 inclusive");
+		}
 		
+		if ( to.equals("*") && type !=2	){
+			valid = false;
+			addAlert("You must be a volunteer to set undefined location");
+		}
+		
+		if ( name.contains(",") ){
+			valid = false;
+			addAlert("Name cannot contain a comma");
+		}
+		
+		if( name.length() == 0){
+			valid = false;
+			addAlert("Must enter a name");
+		}
+			
 		//if a requester only wants to match with volunteers to location must be defined
 		if ( type == 1 && to.equals("*") )
 			valid = false;
 		
-		
-
 	}
 
 	/**
@@ -78,5 +102,24 @@ public class Request {
 				return true;
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return String[] - alerts corresponding to how form is invalid
+	 */
+	public String[] getAlerts(){ return alerts; }
+	
+	/**
+	 * Adds new Alert to Alert array
+	 */
+	 private void addAlert(String alert){
+		 String[] temp = new String[alerts.length + 1];
+		 int i = 0;
+		 for ( ; i < alerts.length; i++)
+			 temp[i] = alerts[i];
+		 temp[i] = alert;
+		 alerts = temp;
+	 }
+	 
 
 }
