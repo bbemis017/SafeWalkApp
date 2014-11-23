@@ -24,14 +24,14 @@
         <item>CL50 - Class of 1950</item>
         <item>LWSN - Lawson</item>
         <item>PMU - Purdue Memorial Union</item>
-        <item>PUSH - not sure of exact name</item>
+        <item>PUSH - Purdue University Student Health</item>
     </string-array>
     <string-array name="to_array">
-        <item>* - any listed location</item>
     	<item>EE - Electrical Engineering</item>
         <item>CL50 - Class of 1950</item>
         <item>LWSN - Lawson</item>
         <item>PMU - Purdue Memorial Union</item>
-        <item>PUSH - not sure of exact name</item>
+        <item>PUSH - Purdue University Student Health</item>
+        <item>* - any listed location</item>
     </string-array>
 </resources>

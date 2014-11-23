@@ -113,28 +113,50 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 	@Override
 	public void onSubmit() {
 		// TODO: Get client info via client fragment
-		
-		// Server info
-		String host = this.serverFragment.getHost( getResources().getString(R.string.default_host) );
-		
-		int port = this.serverFragment.getPort(Integer.parseInt( getResources().getString(R.string.default_port) ) );
-		// TODO: sanity check the results of the previous two dialogs
+		ClientFragment cf = clientFragment;
+		int id = cf.preferences.getCheckedRadioButtonId();
+		int type = -1;
+		switch (id) {
+		case R.id.rb_requester:
+			type = 1;
+			break;
+		case R.id.rb_volunteer:
+			type = 2;
+			break;
+		case R.id.rb_noPreference:
+			type = 0;
+			break;
+		default:
+			type = -1;
+			break;
+		}
+		Request request = new Request(cf.name.toString(),
+				Request.LOCATION[cf.from.getSelectedItemPosition()],
+				Request.LOCATION[cf.to.getSelectedItemPosition()], type);
+		if (request.isValid()) {
+			// Server info
+			String host = this.serverFragment.getHost(getResources().getString(R.string.default_host));
 
-		// TODO: Need to get command from client fragment
-		String command = this.getResources().getString(R.string.default_command);
+			int port = this.serverFragment.getPort(Integer.parseInt(getResources().getString(R.string.default_port)));
+			// TODO: sanity check the results of the previous two dialogs
 
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
+			// TODO: Need to get command from client fragment
+			String command = this.getResources().getString(R.string.default_command);
 
-		this.title.setText(getResources().getString(R.string.match));
-		this.left.setVisibility(View.INVISIBLE);
-		this.right.setVisibility(View.INVISIBLE);
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-		// TODO: You may want additional parameters here if you tailor
-		// the match fragment
-		MatchFragment frag = MatchFragment.newInstance(this, host, port,command);
+			this.title.setText(getResources().getString(R.string.match));
+			this.left.setVisibility(View.INVISIBLE);
+			this.right.setVisibility(View.INVISIBLE);
 
-		ft.replace(R.id.fl_main, frag);
-		ft.commit();
+			// TODO: You may want additional parameters here if you tailor
+			// the match fragment
+			MatchFragment frag = MatchFragment.newInstance(this, host, port,
+					command);
+
+			ft.replace(R.id.fl_main, frag);
+			ft.commit();
+		}
 	}
 
 	/**
