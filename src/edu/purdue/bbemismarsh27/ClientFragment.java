@@ -71,6 +71,13 @@ public class ClientFragment extends Fragment implements OnClickListener {
 		name = (EditText)view.findViewById(R.id.et_name);
 		preferences = (RadioGroup) view.findViewById(R.id.rg_preferences);
 		from = (Spinner)view.findViewById(R.id.spin_from);
+		ArrayAdapter<CharSequence> fromAdapter  = ArrayAdapter.createFromResource(view.getContext(), R.array.from_array, android.R.layout.simple_spinner_dropdown_item);
+		from = (Spinner)view.findViewById(R.id.spin_from);
+		from.setAdapter(fromAdapter);
+		ArrayAdapter<CharSequence> toAdapter  = ArrayAdapter.createFromResource(view.getContext(), R.array.to_array, android.R.layout.simple_spinner_dropdown_item);
+		to = (Spinner)view.findViewById(R.id.spin_to);
+		to.setAdapter(toAdapter);
+		
 		
 
 		//TODO: load submit button from xml
