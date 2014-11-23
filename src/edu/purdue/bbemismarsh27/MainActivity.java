@@ -4,8 +4,11 @@ import edu.purdue.bbemismarsh27.R;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,7 +133,7 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 			type = -1;
 			break;
 		}
-		Request request = new Request(cf.name.toString(),
+		Request request = new Request(cf.name.getText().toString(),
 				Request.LOCATION[cf.from.getSelectedItemPosition()],
 				Request.LOCATION[cf.to.getSelectedItemPosition()], type);
 		if (request.isValid()) {
@@ -158,7 +161,21 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 			ft.commit();
 		}
 		else{
-			//TODO: display AlertDialog
+			// display AlertDialog
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(request.getAlerts());
+			builder.setTitle("Form Invalid");
+			builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					//closes dialog
+					dialog.cancel();
+					
+				}
+			});
+			AlertDialog dialog = builder.create();
+			dialog.show();
 		}
 	}
 

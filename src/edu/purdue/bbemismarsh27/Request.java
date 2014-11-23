@@ -54,7 +54,7 @@ public class Request {
 
 		if (type > 2 || type < 0){
 			valid = false;
-			addAlert("Type must be between 0 and 2 inclusive");
+			addAlert("Must choose a Preference");
 		}
 		
 		if ( to.equals("*") && type !=2	){
@@ -105,9 +105,14 @@ public class Request {
 	
 	/**
 	 * 
-	 * @return String[] - alerts corresponding to how form is invalid
+	 * @return String - alerts corresponding to how form is invalid
 	 */
-	public String[] getAlerts(){ return alerts; }
+	public String getAlerts(){ 
+		String Alert = "";
+		for ( int i = 0; i < alerts.length; i++)
+			Alert += "\n*" + alerts[i];
+		return Alert; 
+		}
 	
 	/**
 	 * Adds new Alert to Alert array
