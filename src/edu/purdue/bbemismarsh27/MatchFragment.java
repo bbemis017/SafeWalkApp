@@ -22,7 +22,7 @@ import android.widget.TextView;
  * @author Benjamin Bemis
  */
 public class MatchFragment extends Fragment implements OnClickListener {
-	public TextView from, to, partner, connection, foundPair, clientInfo,
+	private TextView from, to, partner, connection, foundPair, clientInfo,
 			serverMatch, matchFound;
 	private static final String DEBUG_TAG = "DEBUG";
 
@@ -104,13 +104,13 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		view.findViewById(R.id.bu_start_over).setOnClickListener(this);
 
-//		connection = (TextView)view.findViewById(R.id.);
-//		clientInfo = (TextView)view.findViewById(R.id.client_info);
-//		matchFound = (TextView)view.findViewById(R.id.match_found);
-//		partner = (TextView)view.findViewById(R.id.server_partner);
-//		from = (TextView)view.findViewById(R.id.server_from);
-//		to = (TextView)view.findViewById(R.id.server_to);
-//		serverMatch= (TextView)view.findViewById(R.id.server_match);
+		connection = (TextView)view.findViewById(R.id.server_connection);
+		clientInfo = (TextView)view.findViewById(R.id.client_info);
+		matchFound = (TextView)view.findViewById(R.id.match_found);
+		partner = (TextView)view.findViewById(R.id.server_partner);
+		from = (TextView)view.findViewById(R.id.server_from);
+		to = (TextView)view.findViewById(R.id.server_to);
+		serverMatch= (TextView)view.findViewById(R.id.match_text);
 		// TODO: import your Views from the layout here. See example in
 		// ServerFragment.
 
