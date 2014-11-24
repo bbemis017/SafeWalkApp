@@ -11,15 +11,19 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * This fragment is the "page" where the application display the log from the
  * server and wait for a match.
- *
+ * 
  * @author YL
+ * @author Benjamin Bemis
  */
 public class MatchFragment extends Fragment implements OnClickListener {
-
+	public TextView from, to, partner, connection, foundPair, clientInfo,
+			serverMatch, matchFound;
 	private static final String DEBUG_TAG = "DEBUG";
 
 	/**
@@ -43,6 +47,8 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	 */
 	private String command;
 
+	private Request reqToSend, reqRecieved;
+
 	// TODO: your own class fields here
 
 	// Class methods
@@ -59,19 +65,22 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	 * 
 	 * @param command
 	 *            command you have to send to the server.
+	 * @param reqToSend
+	 *            request to send to the server
 	 * 
 	 * @return the fragment initialized.
 	 */
 	// TODO: you can add more parameters, follow the way we did it.
 	// ** DO NOT CREATE A CONSTRUCTOR FOR MatchFragment **
 	public static MatchFragment newInstance(StartOverCallbackListener activity,
-			String host, int port, String command) {
+			String host, int port, String command, Request reqToSend) {
 		MatchFragment f = new MatchFragment();
 
 		f.activity = activity;
 		f.host = host;
 		f.port = port;
 		f.command = command;
+		f.reqToSend = reqToSend;
 
 		return f;
 	}
@@ -95,6 +104,13 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		view.findViewById(R.id.bu_start_over).setOnClickListener(this);
 
+//		connection = (TextView)view.findViewById(R.id.);
+//		clientInfo = (TextView)view.findViewById(R.id.client_info);
+//		matchFound = (TextView)view.findViewById(R.id.match_found);
+//		partner = (TextView)view.findViewById(R.id.server_partner);
+//		from = (TextView)view.findViewById(R.id.server_from);
+//		to = (TextView)view.findViewById(R.id.server_to);
+//		serverMatch= (TextView)view.findViewById(R.id.server_match);
 		// TODO: import your Views from the layout here. See example in
 		// ServerFragment.
 
@@ -150,8 +166,9 @@ public class MatchFragment extends Fragment implements OnClickListener {
 
 			return "";
 		}
+
 		public void close() {
-                    // TODO: Clean up the client
+			// TODO: Clean up the client
 		}
 
 		/**

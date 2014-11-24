@@ -10,18 +10,122 @@
 
     <!-- TODO your layout here -->
 
+    <TextView
+        android:id="@+id/server_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Server Connection Successful."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/to"
+        android:layout_centerVertical="true"
+        android:text="From:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/partner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/from"
+        android:layout_alignLeft="@+id/from"
+        android:layout_marginBottom="27dp"
+        android:text="Partner:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/client_info"
+        android:layout_below="@+id/from"
+        android:layout_marginTop="24dp"
+        android:text="To:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/server_partner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/partner"
+        android:layout_alignRight="@+id/server_connection"
+        android:text="Jane Doe"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/server_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/to"
+        android:layout_alignLeft="@+id/server_partner"
+        android:text="PMU"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/server_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/to"
+        android:layout_alignBottom="@+id/to"
+        android:layout_alignLeft="@+id/server_from"
+        android:text="Anywhere"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <Button
         android:id="@+id/bu_start_over"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_bigline"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_toRightOf="@+id/from"
+        android:background="@color/salmon"
         android:gravity="center"
         android:minHeight="60dp"
         android:minWidth="150dp"
         android:padding="@dimen/padding"
-        android:background="@color/salmon"
         android:text="@string/start_over"
         android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/client_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/server_connection"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="John Doe from PMU to PUSH blah blah"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/match_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/client_info"
+        android:layout_below="@+id/client_info"
+        android:layout_marginTop="30dp"
+        android:text="Yay a pair has been found good for you" />
+
+    <TextView
+        android:id="@+id/match_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bu_start_over"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:background="#65656D"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:text="A match has been found!"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible" />
 
 </RelativeLayout>
