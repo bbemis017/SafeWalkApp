@@ -185,12 +185,13 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				
 				// wait for response and store that response as reqRecieved
 				BufferedReader br = new BufferedReader( new InputStreamReader( sock.getInputStream() ) );
-				String line;
-				while( (line = br.readLine() ) == null);
-				reqRecieved = new Request(line);
 				
-				// acknowledge match request
-				pw.write(":ACK");
+				reqRecieved = new Request( br.readLine() );
+				if ( reqRecieved.isValid()){
+					// acknowledge match request
+					pw.write(":ACK");
+					Log.d(DEBUG_TAG, "aknowledge");
+				}
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
