@@ -1,5 +1,7 @@
 package edu.purdue.bbemismarsh27;
 
+import java.util.regex.Pattern;
+
 /**
  * This class checks the validity of a request and also provides a string to
  * send to the server
@@ -32,6 +34,14 @@ public class Request {
 		this.from = from;
 		this.to = to;
 		this.type = type;
+		
+		checkValidity();
+	}
+	
+	/**
+	 * checks validity of fields of this instance
+	 */
+	private void checkValidity(){
 		if (from.equals("*")){
 			valid = false;
 			addAlert("From must be a defined location");
@@ -75,7 +85,39 @@ public class Request {
 		//if a requester only wants to match with volunteers to location must be defined
 		if ( type == 1 && to.equals("*") )
 			valid = false;
-		
+	}
+	
+	/**
+	 * Creates Request object from a response string
+	 * @param line
+	 */
+	public Request(String line) {
+		final String prefix = "RESPONSE: ";
+		try {
+			valid = true;
+			alerts = new String[0];
+			
+			StringBuilder sbLine = new StringBuilder(line);
+			sbLine.delete(0,  prefix.length() );
+			line = sbLine.toString();
+			
+			String[] tokens = line.split(Pattern.quote(","));
+			name = tokens[0];
+			from = tokens[1];
+			
+
+			to = tokens[2];
+			
+
+			type = Integer.parseInt(tokens[3]);
+
+			checkValidity();
+
+		} catch (Exception e) {
+			valid = false;
+			
+		}
+
 	}
 
 	/**

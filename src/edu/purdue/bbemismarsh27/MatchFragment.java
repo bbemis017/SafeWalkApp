@@ -1,6 +1,13 @@
 package edu.purdue.bbemismarsh27;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import edu.purdue.bbemismarsh27.R;
 import android.app.Fragment;
@@ -111,7 +118,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		from = (TextView)view.findViewById(R.id.server_from);
 		to = (TextView)view.findViewById(R.id.server_to);
 		serverMatch= (TextView)view.findViewById(R.id.match_text);
-		// TODO: import your Views from the layout here. See example in
+		//  import your Views from the layout here. See example in
 		// ServerFragment.
 
 		/**
@@ -147,6 +154,10 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 * Example: The statement in doInBackground will print the message in
 		 * the Eclipse LogCat view.
 		 */
+		
+		private Socket sock;
+		private static final int PORT = 5000;
+		private static final String IP = "10.0.2.2";
 
 		/**
 		 * The system calls this to perform work in a worker thread and delivers
@@ -160,6 +171,32 @@ public class MatchFragment extends Fragment implements OnClickListener {
 			Log.d(DEBUG_TAG, String
 					.format("The Server at the address %s uses the port %d",
 							host, port));
+			try {
+				// create sock and send request to server
+				InetAddress serverAddr = InetAddress.getByName(host);
+				Log.d(DEBUG_TAG,"getAddress");
+				sock = new Socket(serverAddr, port);
+				Log.d(DEBUG_TAG,"socket created");
+				PrintWriter pw = new PrintWriter( sock.getOutputStream() );
+				pw.println( reqToSend.toString() );
+				pw.flush();
+				
+				Log.d(DEBUG_TAG,"message sent");
+				
+				// wait for response and store that response as reqRecieved
+				BufferedReader br = new BufferedReader( new InputStreamReader( sock.getInputStream() ) );
+				String line;
+				while( (line = br.readLine() ) == null);
+				reqRecieved = new Request(line);
+				
+				// acknowledge match request
+				pw.write(":ACK");
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 
 			Log.d(DEBUG_TAG, String.format(
 					"The Client will send the command: %s", command));
@@ -169,6 +206,13 @@ public class MatchFragment extends Fragment implements OnClickListener {
 
 		public void close() {
 			// TODO: Clean up the client
+			if(!sock.isClosed()){
+				try {
+					sock.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		/**
