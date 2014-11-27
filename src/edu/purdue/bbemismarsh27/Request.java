@@ -191,5 +191,9 @@ public class Request {
 		 alerts = temp;
 	 }
 	 
+	 public String getName(){ return name; }
+	 public String getFrom(){ return from; }
+	 public String getTo(){ return to; }
+	 
 
 }

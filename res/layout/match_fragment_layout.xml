@@ -56,7 +56,8 @@
         android:layout_alignBottom="@+id/partner"
         android:layout_alignRight="@+id/server_connection"
         android:text="Jane Doe"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible"  />
 
     <TextView
         android:id="@+id/server_from"
@@ -65,7 +66,8 @@
         android:layout_above="@+id/to"
         android:layout_alignLeft="@+id/server_partner"
         android:text="PMU"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible"  />
 
     <TextView
         android:id="@+id/server_to"
@@ -75,7 +77,8 @@
         android:layout_alignBottom="@+id/to"
         android:layout_alignLeft="@+id/server_from"
         android:text="Anywhere"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible"  />
 
     <Button
         android:id="@+id/bu_start_over"

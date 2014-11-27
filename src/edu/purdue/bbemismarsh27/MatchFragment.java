@@ -156,8 +156,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		
 		private Socket sock;
-		private static final int PORT = 5000;
-		private static final String IP = "10.0.2.2";
+		private int publishes = 0;
 
 		/**
 		 * The system calls this to perform work in a worker thread and delivers
@@ -177,11 +176,15 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				Log.d(DEBUG_TAG,"getAddress");
 				sock = new Socket(serverAddr, port);
 				Log.d(DEBUG_TAG,"socket created");
-				PrintWriter pw = new PrintWriter( sock.getOutputStream() );
+				publishProgress("connection to the server. Success");
+				PrintWriter pw = new PrintWriter( sock.getOutputStream(),true );
 				pw.println( reqToSend.toString() );
-				pw.flush();
+				publishProgress(reqToSend.toString());
+				
 				
 				Log.d(DEBUG_TAG,"message sent");
+				
+				
 				
 				// wait for response and store that response as reqRecieved
 				BufferedReader br = new BufferedReader( new InputStreamReader( sock.getInputStream() ) );
@@ -189,8 +192,9 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				reqRecieved = new Request( br.readLine() );
 				if ( reqRecieved.isValid()){
 					// acknowledge match request
-					pw.write(":ACK");
+					pw.println(":ACK");
 					Log.d(DEBUG_TAG, "aknowledge");
+					publishProgress("a pair has been found by the server.");
 				}
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
@@ -207,7 +211,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 
 		public void close() {
 			// TODO: Clean up the client
-			if(!sock.isClosed()){
+			if(sock != null && !sock.isClosed()){
 				try {
 					sock.close();
 				} catch (IOException e) {
@@ -229,6 +233,10 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPreExecute() {
+			publishes = 0;
+			connection.setText("");
+			clientInfo.setText("");
+			matchFound.setText("");
 		}
 
 		/**
@@ -236,6 +244,15 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPostExecute(String result) {
+			//TODO: set appropriate data to textviews
+			partner.setText( reqRecieved.getName() );
+			from.setText( reqRecieved.getFrom() );
+			to.setText( reqRecieved.getTo() );
+			//changes visibility of objects
+			partner.setVisibility(TextView.VISIBLE);
+			from.setVisibility(TextView.VISIBLE);
+			to.setVisibility(TextView.VISIBLE);
+			matchFound.setVisibility(TextView.VISIBLE);
 		}
 
 		/**
@@ -244,6 +261,19 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onProgressUpdate(String... result) {
+			String output = result[0];
+			switch(publishes){
+			case 0:
+				connection.setText(output);
+				break;
+			case 1:
+				clientInfo.setText(output);
+				break;
+			case 2:
+				matchFound.setText(output);
+				break;
+			}
+			publishes++;
 		}
 	}
 
