@@ -184,7 +184,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				
 				Log.d(DEBUG_TAG,"message sent");
 				
-				
+				isCancelled();
 				
 				// wait for response and store that response as reqRecieved
 				BufferedReader br = new BufferedReader( new InputStreamReader( sock.getInputStream() ) );
@@ -218,6 +218,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
+			cancel(true);
 		}
 
 		/**
