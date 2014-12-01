@@ -254,6 +254,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 			from.setVisibility(TextView.VISIBLE);
 			to.setVisibility(TextView.VISIBLE);
 			matchFound.setVisibility(TextView.VISIBLE);
+			serverMatch.setVisibility(TextView.VISIBLE);
 		}
 
 		/**
