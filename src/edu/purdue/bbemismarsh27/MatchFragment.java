@@ -196,7 +196,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 					publishProgress("a pair has been found by the server.");
 				}else if(line.endsWith("ERROR: connection reset") ){
 					// notify user
-					publishes = -1;
+					publishes = 2;
 					publishProgress("Connection was reset by host");
 					cancel(true);
 				}
