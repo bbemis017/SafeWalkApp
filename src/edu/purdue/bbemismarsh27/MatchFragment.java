@@ -203,7 +203,12 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				
 				isCancelled();
 
-			} catch (UnknownHostException e) {
+			} catch(ConnectException e){
+				publishes = -1;
+				publishProgress("server is not available");
+				cancel(true);
+			}catch (UnknownHostException e) {
+			
 				Log.d("test","UNKOWNHOST;ASDKLSDFJLSDFK");
 				publishes = -1;
 				cancel(true);
