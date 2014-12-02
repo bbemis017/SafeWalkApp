@@ -5,6 +5,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -30,8 +31,7 @@ import android.widget.TextView;
  * @author Benjamin Bemis
  */
 public class MatchFragment extends Fragment implements OnClickListener {
-	private TextView from, to, partner, connection, foundPair, clientInfo,
-			serverMatch, matchFound;
+	private TextView from, to, partner, connection, foundPair, clientInfo, serverMatch, matchFound;
 	private static final String DEBUG_TAG = "DEBUG";
 
 	/**
@@ -80,8 +80,8 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	 */
 	// TODO: you can add more parameters, follow the way we did it.
 	// ** DO NOT CREATE A CONSTRUCTOR FOR MatchFragment **
-	public static MatchFragment newInstance(StartOverCallbackListener activity,
-			String host, int port, String command, Request reqToSend) {
+	public static MatchFragment newInstance(StartOverCallbackListener activity, String host, int port, String command,
+			Request reqToSend) {
 		MatchFragment f = new MatchFragment();
 
 		f.activity = activity;
@@ -97,14 +97,12 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	 * Called when the fragment will be displayed.
 	 */
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
 			return null;
 		}
 
-		View view = inflater.inflate(R.layout.match_fragment_layout, container,
-				false);
+		View view = inflater.inflate(R.layout.match_fragment_layout, container, false);
 
 		/**
 		 * Register this fragment to be the OnClickListener for the startover
@@ -112,14 +110,14 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		view.findViewById(R.id.bu_start_over).setOnClickListener(this);
 
-		connection = (TextView)view.findViewById(R.id.server_connection);
-		clientInfo = (TextView)view.findViewById(R.id.client_info);
-		matchFound = (TextView)view.findViewById(R.id.match_found);
-		partner = (TextView)view.findViewById(R.id.server_partner);
-		from = (TextView)view.findViewById(R.id.server_from);
-		to = (TextView)view.findViewById(R.id.server_to);
-		serverMatch= (TextView)view.findViewById(R.id.match_text);
-		//  import your Views from the layout here. See example in
+		connection = (TextView) view.findViewById(R.id.server_connection);
+		clientInfo = (TextView) view.findViewById(R.id.client_info);
+		matchFound = (TextView) view.findViewById(R.id.match_found);
+		partner = (TextView) view.findViewById(R.id.server_partner);
+		from = (TextView) view.findViewById(R.id.server_from);
+		to = (TextView) view.findViewById(R.id.server_to);
+		serverMatch = (TextView) view.findViewById(R.id.match_text);
+		// import your Views from the layout here. See example in
 		// ServerFragment.
 
 		/**
@@ -155,7 +153,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 * Example: The statement in doInBackground will print the message in
 		 * the Eclipse LogCat view.
 		 */
-		
+
 		private Socket sock;
 		private int publishes = 0;
 
@@ -168,51 +166,59 @@ public class MatchFragment extends Fragment implements OnClickListener {
 			/**
 			 * TODO: Your Client code here.
 			 */
-			Log.d(DEBUG_TAG, String
-					.format("The Server at the address %s uses the port %d",
-							host, port));
+			Log.d(DEBUG_TAG, String.format("The Server at the address %s uses the port %d", host, port));
 			try {
 				// create sock and send request to server
 				InetAddress serverAddr = InetAddress.getByName(host);
-				Log.d(DEBUG_TAG,"getAddress");
-				sock = new Socket(serverAddr, port);
-				Log.d(DEBUG_TAG,"socket created");
+
+				Log.d(DEBUG_TAG, "getAddress");
+				sock = new Socket(host, port);
+
+				Log.d(DEBUG_TAG, "socket created");
 				publishProgress("connection to the server. Success");
-				PrintWriter pw = new PrintWriter( sock.getOutputStream(),true );
-				pw.println( reqToSend.toString() );
+				PrintWriter pw = new PrintWriter(sock.getOutputStream(), true);
+				pw.println(reqToSend.toString());
 				publishProgress(reqToSend.toString());
-				
-				
-				Log.d(DEBUG_TAG,"message sent");
-				
+
+				Log.d(DEBUG_TAG, "message sent");
+
 				isCancelled();
-				
+
 				// wait for response and store that response as reqRecieved
-				BufferedReader br = new BufferedReader( new InputStreamReader( sock.getInputStream() ) );
-				
-				reqRecieved = new Request( br.readLine() );
-				if ( reqRecieved.isValid()){
+				BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+
+				reqRecieved = new Request(br.readLine());
+				if (reqRecieved.isValid()) {
 					// acknowledge match request
 					pw.println(":ACK");
 					Log.d(DEBUG_TAG, "aknowledge");
 					publishProgress("a pair has been found by the server.");
 				}
+				
+				isCancelled();
+
 			} catch (UnknownHostException e) {
-				e.printStackTrace();
+				Log.d("test","UNKOWNHOST;ASDKLSDFJLSDFK");
+				publishes = -1;
+				cancel(true);
+				publishProgress("server is not available");
 			} catch (IOException e) {
-				e.printStackTrace();
+				publishes = -1;
+				publishProgress("server is not available");
+				cancel(true);
+			} catch ( NullPointerException e){
+				Log.d("NULLPOINTER", "" + e.getMessage());
 			}
 			
 
-			Log.d(DEBUG_TAG, String.format(
-					"The Client will send the command: %s", command));
+			Log.d(DEBUG_TAG, String.format("The Client will send the command: %s", command));
 
 			return "";
 		}
 
 		public void close() {
 			// TODO: Clean up the client
-			if(sock != null && !sock.isClosed()){
+			if (sock != null && !sock.isClosed()) {
 				try {
 					sock.close();
 				} catch (IOException e) {
@@ -246,11 +252,11 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPostExecute(String result) {
-			//TODO: set appropriate data to textviews
-			partner.setText( reqRecieved.getName() );
-			from.setText( reqRecieved.getFrom() );
-			to.setText( reqRecieved.getTo() );
-			//changes visibility of objects
+			// TODO: set appropriate data to textviews
+			partner.setText(reqRecieved.getName());
+			from.setText(reqRecieved.getFrom());
+			to.setText(reqRecieved.getTo());
+			// changes visibility of objects
 			partner.setVisibility(TextView.VISIBLE);
 			from.setVisibility(TextView.VISIBLE);
 			to.setVisibility(TextView.VISIBLE);
@@ -264,12 +270,16 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onProgressUpdate(String... result) {
-			String output  = "";
+			String output = "";
 			Calendar c = Calendar.getInstance();
 			output += "[" + c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH);
-			output += " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "] ";
+			output += " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND)
+					+ "] ";
 			output += result[0];
-			switch(publishes){
+			switch (publishes) {
+			case -1:
+				connection.setText(output);
+				break;
 			case 0:
 				connection.setText(output);
 				break;
