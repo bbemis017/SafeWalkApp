@@ -162,7 +162,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 * it the parameters given to AsyncTask.execute()
 		 */
 		protected String doInBackground(String... params) {
-
+			publishes = 0;
 			/**
 			 * TODO: Your Client code here.
 			 */
@@ -186,13 +186,19 @@ public class MatchFragment extends Fragment implements OnClickListener {
 
 				// wait for response and store that response as reqRecieved
 				BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-
-				reqRecieved = new Request(br.readLine());
+				
+				String line = br.readLine();
+				reqRecieved = new Request(line);
 				if (reqRecieved.isValid()) {
 					// acknowledge match request
 					pw.println(":ACK");
 					Log.d(DEBUG_TAG, "aknowledge");
 					publishProgress("a pair has been found by the server.");
+				}else if(line.endsWith("ERROR: connection reset") ){
+					// notify user
+					publishes = -1;
+					publishProgress("Connection was reset by host");
+					cancel(true);
 				}
 				
 				isCancelled();
