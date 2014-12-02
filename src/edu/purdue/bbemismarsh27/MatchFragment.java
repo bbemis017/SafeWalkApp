@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Calendar;
 
 import edu.purdue.bbemismarsh27.R;
 import android.app.Fragment;
@@ -263,7 +264,11 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onProgressUpdate(String... result) {
-			String output = result[0];
+			String output  = "";
+			Calendar c = Calendar.getInstance();
+			output += "[" + c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH);
+			output += " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "] ";
+			output += result[0];
 			switch(publishes){
 			case 0:
 				connection.setText(output);
