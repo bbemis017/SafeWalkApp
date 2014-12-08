@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.Calendar;
 
@@ -28,7 +30,7 @@ import android.widget.TextView;
  * server and wait for a match.
  * 
  * @author YL
- * @author Benjamin Bemis
+ * @author Benjamin Bemis <bbemis@purdue.edu>
  * @author Lucas Marsh <marsh27@purdue.edu>
  */
 public class MatchFragment extends Fragment implements OnClickListener {
@@ -212,8 +214,8 @@ public class MatchFragment extends Fragment implements OnClickListener {
 			
 				Log.d("test","UNKOWNHOST;ASDKLSDFJLSDFK");
 				publishes = -1;
-				cancel(true);
 				publishProgress("server is not available");
+				cancel(true);
 			} catch (IOException e) {
 				publishes = -1;
 				publishProgress("server is not available");
