@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  * This class checks the validity of a request and also provides a string to
  * send to the server
  * 
- * @author Benjamin Bemis
+ * @author Benjamin Bemis <bbemis@purdue.edu>
  * @author Lucas Marsh <marsh27@purdue.edu>
  */
 public class Request {

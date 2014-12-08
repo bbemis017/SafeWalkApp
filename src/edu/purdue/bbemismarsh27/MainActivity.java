@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 /**
  * 
- * @author Benjamin Bemis
+ * @author Benjamin Bemis <bbemis@purdue.edu>
  * @author Lucas Marsh <marsh27@purdue.edu>
  * 
  */
