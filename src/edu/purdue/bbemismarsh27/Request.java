@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * send to the server
  * 
  * @author Benjamin Bemis
- * 
+ * @author Lucas Marsh <marsh27@purdue.edu>
  */
 public class Request {
 

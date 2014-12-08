@@ -19,6 +19,7 @@ import android.widget.Spinner;
  *
  * @author YL
  * @author Benjamin Bemis
+ * @author Lucas Marsh <marsh27@purdue.edu>
  */
 public class ClientFragment extends Fragment implements OnClickListener {
 

@@ -29,6 +29,7 @@ import android.widget.TextView;
  * 
  * @author YL
  * @author Benjamin Bemis
+ * @author Lucas Marsh <marsh27@purdue.edu>
  */
 public class MatchFragment extends Fragment implements OnClickListener {
 	private TextView from, to, partner, connection, foundPair, clientInfo, serverMatch, matchFound;

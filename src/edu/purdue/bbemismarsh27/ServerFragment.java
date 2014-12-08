@@ -12,6 +12,7 @@ import android.widget.EditText;
  * This fragment is the "page" where the user enter the server coordinates.
  *
  * @author CS180_TAs
+ * @author Lucas Marsh <marsh27@purdue.edu>
  */
 public class ServerFragment extends Fragment {
 

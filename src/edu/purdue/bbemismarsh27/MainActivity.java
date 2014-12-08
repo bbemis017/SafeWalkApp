@@ -18,6 +18,7 @@ import android.widget.TextView;
 /**
  * 
  * @author Benjamin Bemis
+ * @author Lucas Marsh <marsh27@purdue.edu>
  * 
  */
 public class MainActivity extends Activity implements SubmitCallbackListener, StartOverCallbackListener {
