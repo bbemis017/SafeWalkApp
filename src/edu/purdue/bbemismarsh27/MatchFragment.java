@@ -175,7 +175,16 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				InetAddress serverAddr = InetAddress.getByName(host);
 
 				Log.d(DEBUG_TAG, "getAddress");
-				sock = new Socket(host, port);
+//				sock = new Socket(host, port);
+				SocketAddress sockAddr = new InetSocketAddress(host,port);
+				sock = new Socket();
+				sock.connect(sockAddr,10000);
+				if( sock == null || !sock.isConnected()){
+					publishes = -1;
+					publishProgress("server is not available");
+					cancel(true);
+					isCancelled();
+				}
 
 				Log.d(DEBUG_TAG, "socket created");
 				publishProgress("connection to the server. Success");
